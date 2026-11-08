@@ -49,19 +49,28 @@
 
     <!-- 1. 헤더-->
 
-    <header id="top">
-        <h1>Net:Check</h1>
-        <p class="service-subtitle">네트워크 장비 스마트 점검</p>
-        <p>복잡한 네트워크 장비 점검을
-            더욱 쉽고 정확하게 관리하세요.</p>
+    <header id="top" class="site-header">
+        <div class="header-inner">
+            <div class="site-brand">
+                <h1>Net:Check</h1>
+                <p class="service-subtitle">네트워크 장비 스마트 점검</p>
+                <p>복잡한 네트워크 장비 점검을 더욱 쉽고 정확하게 관리하세요.</p>
+            </div>
 
-        <nav aria-label="주요 메뉴">
-            <a href="#about">서비스 소개</a>
-            <a href="#features">주요 기능</a>
-            <a href="#steps">이용 방법</a>
-            <a href="#inspection-setup">장비 점검</a>
-            <a href="#subscribe">서비스 소식 </a>
-        </nav>
+            <button id="menu-toggle" class="menu-toggle" type="button"
+                    aria-controls="main-nav" aria-expanded="false">메뉴 열기</button>
+
+            <nav id="main-nav" class="main-nav" aria-label="주요 메뉴">
+                <ul>
+                    <li><a href="#about">서비스 소개</a></li>
+                    <li><a href="#features">주요 기능</a></li>
+                    <li><a href="#steps">이용 방법</a></li>
+                    <li><a href="#inspection-setup">장비 점검</a></li>
+                    <li><a href="#archive">점검 기록</a></li>
+                    <li><a href="#subscribe">서비스 소식</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -192,14 +201,12 @@
             </h2>
 
             <p id="inspection-dialog-description">
-
                 Net:Check는 사용자가 입력한
                 네트워크 장비 점검 정보를 바탕으로
                 상태를 분석하는 서비스입니다.
-
             </p>
 
-            <p>장비에 명령어를 전송하거나 네트워크 설정을 변경합니다.</p>
+            <p>실제 장비에 명령어를 전송하거나 네트워크 설정을 변경하지 않습니다.</p>
 
             <div class="dialog-actions">
 
@@ -435,11 +442,66 @@
                     <div><span>최종 점검 상태</span><strong id="complete-status"></strong></div>
                 </div>
                 <div id="complete-message"class="complete-message"aria-live="polite"> </div>
-                <div class="step-actions"><button id="restart-button" type="button">새로운 장비 점검 시작하기</button></div>
+                <p id="save-status" class="submit-status" role="status" aria-live="polite"></p>
+                <div class="step-actions">
+                    <button id="save-inspection" type="button">점검 결과 저장하기</button>
+                    <button id="restart-button" type="button">새로운 장비 점검 시작하기</button>
+                    <a href="#archive" class="button">저장한 점검 기록 보기</a>
+                </div>
             </section>
         </section>
 
-        <!--8. 서비스 소식 신청 -->
+        <!-- 8. 점검 기록 관리: 9~10주차 저장·조회·필터 기능 -->
+        <section id="archive" class="archive-section" aria-labelledby="archive-title">
+            <h2 id="archive-title">내 장비 점검 기록</h2>
+            <p>저장한 점검 결과를 다시 확인하거나 취소·복원할 수 있습니다.
+               기록은 현재 브라우저의 로컬 스토리지(Local Storage)에 보관됩니다.</p>
+
+            <div class="inspection-filters" role="group" aria-label="점검 기록 표시 조건">
+                <button class="filter-button is-active" type="button"
+                        data-filter="all" aria-pressed="true">전체</button>
+                <button class="filter-button" type="button"
+                        data-filter="normal" aria-pressed="false">정상</button>
+                <button class="filter-button" type="button"
+                        data-filter="warning" aria-pressed="false">주의</button>
+                <button class="filter-button" type="button"
+                        data-filter="critical" aria-pressed="false">점검 필요</button>
+            </div>
+
+            <p id="archive-count" class="archive-count" role="status" aria-live="polite">현재 표시 중인 점검 기록 0건</p>
+            <p id="archive-status" class="archive-status" role="status" aria-live="polite"></p>
+
+            <div id="empty-state" class="empty-state">
+                <h3>아직 저장한 점검 기록이 없습니다.</h3>
+                <p>장비 점검을 완료하고 결과를 저장하면 이곳에서 확인할 수 있습니다.</p>
+                <a href="#inspection-setup">장비 점검 시작하기</a>
+            </div>
+            <ul id="inspection-list" class="inspection-list" aria-label="저장한 장비 점검 기록" hidden></ul>
+        </section>
+
+        <!-- 점검 기록 상세 보기 -->
+        <dialog id="record-dialog" class="record-dialog" aria-labelledby="record-dialog-title">
+            <h2 id="record-dialog-title">점검 기록 상세</h2>
+            <p id="record-dialog-status" role="status"></p>
+            <dl class="record-details">
+                <div><dt>장비명</dt><dd id="record-name"></dd></div>
+                <div><dt>설치 위치</dt><dd id="record-location"></dd></div>
+                <div><dt>장비 종류</dt><dd id="record-type"></dd></div>
+                <div><dt>점검 담당자</dt><dd id="record-inspector"></dd></div>
+                <div><dt>예상 점검시간</dt><dd id="record-duration"></dd></div>
+                <div><dt>추가 점검</dt><dd id="record-additional"></dd></div>
+                <div><dt>전원 상태</dt><dd id="record-power"></dd></div>
+                <div><dt>링크 상태</dt><dd id="record-link"></dd></div>
+                <div><dt>알람 상태</dt><dd id="record-alarm"></dd></div>
+                <div><dt>종합 점검 결과</dt><dd id="record-result"></dd></div>
+                <div><dt>점검 일시</dt><dd id="record-date"></dd></div>
+            </dl>
+            <h3>권장 점검 사항</h3>
+            <ul id="record-actions"></ul>
+            <button id="record-dialog-close" type="button">닫기</button>
+        </dialog>
+
+        <!-- 9. 서비스 소식 신청 -->
         <section id="subscribe" class="subscribe-card">
             <h2>Net:Check 서비스 소식</h2>
             <p>새로운 점검 기능과
@@ -460,7 +522,7 @@
         <small> © 2026 Net:Check.
             UI/UX Programming Midterm Project.</small>
         <p> 본 서비스는 네트워크 장비 진단 서비스 입니다.</p>
-        <a href="#top"></a>
+        <a href="#top">맨 위로 이동</a>
     </footer>
     <script src="script.js"></script>
 </body>

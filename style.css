@@ -445,3 +445,220 @@ body.dark .complete-step h3 { color: var(--success);}
     .summary-list strong {flex: none; width: 100%;text-align: left;}
     .diagnosis-result {padding: 16px;}
 }
+
+/* ============================================================
+   9~10주차 통합: 내비게이션, 점검 기록, 필터, 상세 보기
+   기존 Net:Check의 점검·진단 스타일을 유지하는 확장 스타일
+   ============================================================ */
+
+/* 메뉴의 실제 구조: nav > ul > li > a */
+.site-header .header-inner { min-width: 0; }
+.site-header .site-brand { min-width: 0; }
+.site-header .main-nav { display: block; }
+.site-header .main-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-header .main-nav li { margin: 0; padding: 0; }
+.site-header .main-nav a {
+    display: block;
+    padding: 9px 13px;
+    border-radius: 9px;
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .2s, background-color .2s;
+}
+.site-header .main-nav a:hover { color: var(--primary); background: var(--primary-light); }
+.site-header .main-nav a.is-current,
+.site-header .main-nav a[aria-current="location"] {
+    color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: inset 0 -3px 0 var(--primary);
+}
+.menu-toggle {
+    display: none;
+    min-height: 44px;
+    padding: 9px 15px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    white-space: nowrap;
+}
+.menu-toggle:hover:not(:disabled) { background: var(--primary-light); color: var(--primary); }
+section[id] { scroll-margin-top: 20px; }
+
+/* 기존 버튼과 동일한 시각적 역할을 하는 링크 */
+a.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 11px 20px;
+    border-radius: 10px;
+    color: #fff;
+    background: #2563eb;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+a.button:hover { background: #1d4ed8; }
+
+/* 점검 저장 피드백 */
+.submit-status { min-height: 24px; margin: 14px 0; font-size: 14px; font-weight: 700; }
+.submit-status.is-success { color: var(--success); }
+.submit-status.has-error { color: var(--danger); }
+
+/* 기록 탐색과 필터 */
+.archive-section {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+}
+.inspection-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 16px; }
+.filter-button {
+    min-height: 42px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    background: var(--surface-soft);
+    color: var(--text);
+}
+.filter-button:hover:not(:disabled) { background: var(--primary-light); color: var(--primary); }
+.filter-button.is-active,
+.filter-button[aria-pressed="true"] {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: #fff;
+}
+.filter-button.is-active:hover:not(:disabled) { background: #1d4ed8; color: #fff; }
+.archive-count { margin: 0 0 8px; color: var(--primary); font-size: 14px; font-weight: 800; }
+.archive-status { margin: 0 0 16px; font-size: 14px; }
+.archive-status:empty { display: none; }
+.empty-state {
+    padding: 42px 24px;
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    background: var(--surface-soft);
+    text-align: center;
+}
+.empty-state h3 { margin-bottom: 8px; }
+.empty-state p { margin-bottom: 16px; }
+.empty-state a { font-weight: 800; }
+.inspection-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.inspection-list > li {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface-soft);
+    overflow-wrap: anywhere;
+}
+.inspection-list > li.is-cancelled { opacity: .75; }
+.inspection-list h3 { margin: 8px 0; font-size: 20px; }
+.inspection-list p { font-size: 14px; }
+.inspection-list button { margin: 5px 6px 0 0; }
+.record-card-top, .record-actions, .inspection-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.record-card-top { justify-content: space-between; }
+.record-date { color: var(--text-muted); font-size: 12px; }
+.record-state, .record-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+}
+.record-state.status-normal, .record-badge.status-normal { color: var(--success); background: var(--success-bg); }
+.record-state.status-warning, .record-badge.status-warning { color: var(--warning); background: var(--warning-bg); }
+.record-state.status-critical, .record-badge.status-critical { color: var(--danger); background: var(--danger-bg); }
+
+/* 기록 상세 보기 팝업 */
+.record-dialog {
+    width: min(560px, calc(100% - 32px));
+    max-width: none;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: var(--text);
+    background: var(--surface);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, .25);
+}
+.record-dialog::backdrop { background: rgba(15, 23, 42, .65); }
+.record-dialog h2 { font-size: 25px; }
+.record-dialog h3 { margin-top: 24px; }
+.record-details { margin: 16px 0; border-top: 1px solid var(--border); }
+.record-details > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+.record-details dt { flex: 0 0 38%; color: var(--text-muted); }
+.record-details dd { margin: 0; min-width: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+#record-actions { padding-left: 22px; }
+#record-actions li { margin: 7px 0; }
+#record-dialog-close { margin-top: 14px; }
+
+/* 다크 모드에서도 링크와 필터가 명확히 보이도록 */
+body.dark a.button { color: #fff; }
+body.dark .menu-toggle { color: var(--text); background: var(--surface); }
+body.dark .menu-toggle:hover { color: var(--primary); background: var(--primary-light); }
+body.dark .filter-button.is-active,
+body.dark .filter-button[aria-pressed="true"] { color: #fff; background: #2563eb; border-color: #2563eb; }
+
+/* 태블릿: 카드 목록 1열, 메뉴는 여전히 보이도록 */
+@media (max-width: 900px) {
+    .inspection-list { grid-template-columns: 1fr; }
+}
+
+/* 모바일: 접이식 메뉴는 버튼/실제 표시/aria-expanded를 JS에서 동기화 */
+@media (max-width: 768px) {
+    .site-header .header-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .site-header .site-brand { flex: 1 1 180px; }
+    .menu-toggle { display: inline-flex; flex: 0 0 auto; }
+    .site-header .main-nav { display: none; flex: 1 1 100%; width: 100%; margin: 0; }
+    .site-header .main-nav.is-open { display: block; }
+    .site-header .main-nav ul { display: grid; grid-template-columns: 1fr; gap: 6px; }
+    .site-header .main-nav a { min-height: 44px; padding: 10px 14px; }
+    .archive-section { padding: 22px; }
+    .inspection-list > li { padding: 18px; }
+    .record-dialog { padding: 22px; }
+}
+@media (max-width: 400px) {
+    .site-header .site-brand { flex-basis: 100%; }
+    .menu-toggle { margin-left: auto; }
+    .inspection-filters { gap: 7px; }
+    .filter-button { flex: 1 1 calc(50% - 7px); }
+    .record-details > div { flex-direction: column; gap: 4px; }
+    .record-details dt, .record-details dd { flex: none; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    button, .main-nav a { transition: none; }
+}
+#agreeMessage.has-error {
+    color: #dc2626;
+    background-color: #fee2e2;
+    border: 1px solid #f87171;
+    font-weight: 700;
+}
