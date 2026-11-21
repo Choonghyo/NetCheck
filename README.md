@@ -32,3 +32,7 @@ https://github.com/Choonghyo/NetCheck
 
 Published Website URL  
 https://choonghyo.github.io/NetCheck/
+
+5. 작업 결과
+
+기존 Net:Check 기능을 유지하면서 키보드 조작, 메뉴 탐색, 입력 오류 안내, 점검 기록 관리 등 웹 접근성을 개선했습니다.
