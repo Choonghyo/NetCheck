@@ -333,6 +333,9 @@ function displayDiagnosis() {
 $("#diagnosis-button").addEventListener("click", () => {
   if (!validateDiagnosis()) {
     diagnosisResult.hidden = true;
+    const firstUnchecked = ["power-status", "link-status", "alarm-status"]
+      .find(name => !selectedStatus(name));
+    if (firstUnchecked) $(`input[name="${firstUnchecked}"]`)?.focus();
     return;
   }
   analyzeEquipment();
@@ -452,7 +455,11 @@ function renderRecords() {
     emptyState.querySelector("p").textContent = records.length
       ? "다른 상태 필터를 선택하거나 전체 기록을 확인해 주세요."
       : "장비 점검을 완료하고 결과를 저장하면 이곳에서 확인할 수 있습니다.";
-    emptyState.querySelector("a").hidden = records.length > 0;
+    const emptyAction = emptyState.querySelector("a");
+    emptyAction.hidden = false;
+    const filtered = currentFilter !== "all";
+    emptyAction.textContent = filtered ? "전체 보기" : "장비 점검 시작하기";
+    emptyAction.href = filtered ? "#archive" : "#inspection-setup";
   }
 
   visible.forEach(record => {
@@ -557,7 +564,8 @@ inspectionList.addEventListener("click", event => {
   renderRecords();
   const nextButton = $$('#inspection-list button[data-action="toggle"]')
     .find(item => item.dataset.id === record.id);
-  if (nextButton) nextButton.focus();
+  const selectedFilter = $('.filter-button[aria-pressed="true"]');
+  (nextButton || selectedFilter)?.focus();
 });
 
 $("#record-dialog-close").addEventListener("click", () => recordDialog.close());
@@ -570,7 +578,20 @@ filterButtons.forEach(button => button.addEventListener("click", () => {
     item.setAttribute("aria-pressed", String(active));
   });
   renderRecords();
+  const count = visibleRecords().length;
+  const filterName = button.textContent.trim();
+  archiveStatus.textContent = count > 0
+    ? `${filterName} 점검 기록 ${count}건이 표시됩니다.`
+    : `${filterName} 점검 기록이 없습니다. 다른 조건을 선택해 보세요.`;
 }));
+
+emptyState.querySelector("a").addEventListener("click", event => {
+  if (currentFilter === "all") return;
+  event.preventDefault();
+  const allButton = $('.filter-button[data-filter="all"]');
+  allButton.click();
+  allButton.focus();
+});
 
 const menuToggle = $("#menu-toggle");
 const mainNav = $("#main-nav");
@@ -591,10 +612,19 @@ function updateCurrentNav() {
     if (active) link.setAttribute("aria-current", "location");
     else link.removeAttribute("aria-current");
   });
+  const currentLink = navLinks.find(link => link.getAttribute("aria-current") === "location");
+  const pageName = currentLink ? currentLink.textContent.trim() : "홈";
+  document.title = `${pageName} | ${serviceName}`;
 }
 
 menuToggle.addEventListener("click", () => {
   setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape" || !mainNav.classList.contains("is-open")) return;
+  setMenuOpen(false);
+  menuToggle.focus();
 });
 
 navLinks.forEach(link => link.addEventListener("click", () => {
