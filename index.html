@@ -1,38 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Net:Check | 네트워크 장비 스마트 점검</title>
-
     <meta name="description"
           content="Net:Check는 네트워크 스위치의 점검 정보를 입력하고 장비 상태를 분석하는 웹서비스입니다.">
-
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
-
     <link rel="preconnect"
           href="https://fonts.gstatic.com"
           crossorigin>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
 </head>
-
 <body>
-    
     <a class="skip-link" href="#main-content">본문 바로가기</a>
-
-    
-
-
-    
-
     <header id="top" class="site-header">
         <div class="header-inner">
             <div class="site-brand">
@@ -40,30 +25,29 @@
                 <p class="service-subtitle">네트워크 장비 스마트 점검</p>
                 <p>복잡한 네트워크 장비 점검을 더욱 쉽고 정확하게 관리하세요.</p>
             </div>
-
+            <a class="button sidebar-cta" href="#inspection-setup">+ 새 장비 점검</a>
             <button id="menu-toggle" class="menu-toggle" type="button"
                     aria-controls="main-nav" aria-expanded="false">메뉴 열기</button>
-
             <nav id="main-nav" class="main-nav" aria-label="주요 메뉴">
                 <ul>
                     <li><a href="#about">서비스 소개</a></li>
                     <li><a href="#features">주요 기능</a></li>
                     <li><a href="#steps">이용 방법</a></li>
+                    <li><a href="#help">점검 도움말</a></li>
                     <li><a href="#inspection-setup">장비 점검</a></li>
                     <li><a href="#archive">점검 기록</a></li>
                     <li><a href="#subscribe">서비스 소식</a></li>
                 </ul>
             </nav>
+            <button id="sidebarThemeButton" class="sidebar-theme button-secondary" type="button" aria-pressed="false">
+            다크 테마로 바꾸기</button>
         </div>
     </header>
-
     <main id="main-content" tabindex="-1">
-        
         <section id="about">
             <h2>서비스 소개</h2>
-            <img src="assets/images/netcheck.png" alt="장비 점검 및 상태 분석 기능을 소개하는 이미지" class="service-image">  
+            <img src="assets/images/netcheck.png" alt="장비 점검 및 상태 분석 기능을 소개하는 이미지" class="service-image">
             <h3>네트워크 장비 점검의 새로운 시작</h3>
-
             <p>Net:Check는 통신 기술직 신입사원과
                 현장 엔지니어를 위한
                 네트워크 장비 점검 관리 서비스입니다.</p>
@@ -80,37 +64,34 @@
                     결과를 제공합니다.</p>
             </div>
         </section>
-
-        
         <section id="features">
             <h2>주요 기능</h2>
             <p>Net:Check에서 제공하는
                 주요 점검 기능을 확인해 보세요.</p>
             <div class="tabs" role="tablist" aria-label="주요 기능 선택">
-                <button  id="tab-equipment" class="tab is-active" type="button" role="tab" aria-selected="true" 
+                <button  id="tab-equipment" class="tab is-active" type="button" role="tab" aria-selected="true"
                     aria-controls="feature-equipment" data-target="#feature-equipment">장비 정보 관리</button>
                 <button  id="tab-inspection" class="tab" type="button" role="tab" aria-selected="false"
                  aria-controls="feature-inspection" data-target="#feature-inspection">단계별 점검</button>
                 <button id="tab-analysis" class="tab" type="button" role="tab" aria-selected="false"
                     aria-controls="feature-analysis" data-target="#feature-analysis">상태 자동 분석</button>
             </div>
-
             <div
-                id="feature-equipment" class="panel is-active" role="tabpanel" aria-labelledby="tab-equipment">
+                id="feature-equipment" class="panel is-active" role="tabpanel" tabindex="0" aria-labelledby="tab-equipment">
                 <h3>장비 정보 관리</h3>
                 <p> 네트워크 장비의 이름과 설치 위치,
                     점검 담당자 정보를 입력합니다.</p>
                 <p> 점검 대상 장비를 구분하여
                     체계적으로 관리할 수 있습니다.</p>
             </div>
-            <div id="feature-inspection" class="panel" role="tabpanel" aria-labelledby="tab-inspection" hidden>
+            <div id="feature-inspection" class="panel" role="tabpanel" tabindex="0" aria-labelledby="tab-inspection" hidden>
                 <h3>단계별 장비 점검</h3>
                 <p>장비 정보 입력부터 점검 조건 설정까지
                     단계별 안내에 따라 진행합니다.</p>
                 <p> 이전 단계로 돌아가 입력한 내용을
                     확인하고 수정할 수 있습니다.</p>
             </div>
-            <div id="feature-analysis"class="panel" role="tabpanel"aria-labelledby="tab-analysis" hidden>
+            <div id="feature-analysis" class="panel" role="tabpanel" tabindex="0" aria-labelledby="tab-analysis" hidden>
                 <h3>장비 상태 자동 분석</h3>
                 <p> 전원 상태, 링크 상태, 알람 상태를
                     선택하면 점검 결과를 자동으로 분석합니다.</p>
@@ -119,8 +100,6 @@
                     화면에 표시합니다.</p>
             </div>
         </section>
-
-        
         <section id="steps">
             <h2>이용 방법</h2>
             <p> 다음 순서에 따라 네트워크 장비를
@@ -135,22 +114,25 @@
                 <li> 자동 분석 결과와 권장 조치를 확인합니다.</li>
             </ol>
         </section>
-
-        
+        <section id="help" aria-labelledby="help-title">
+<h2 id="help-title">장비 점검 도움말</h2>
+<div class="accordion">
+<div class="accordion-item"><h3><button class="accordion-trigger" id="help-button-1" type="button" aria-expanded="false" aria-controls="help-panel-1">전원 상태 확인 방법<span class="accordion-state" aria-hidden="true">펼치기 +</span></button></h3><div class="accordion-panel" id="help-panel-1" role="region" aria-labelledby="help-button-1" hidden><p>전원 표시등과 전원 공급 상태를 확인하고 정상 또는 이상을 선택하세요.</p></div></div>
+<div class="accordion-item"><h3><button class="accordion-trigger" id="help-button-2" type="button" aria-expanded="false" aria-controls="help-panel-2">링크 상태 확인 방법<span class="accordion-state" aria-hidden="true">펼치기 +</span></button></h3><div class="accordion-panel" id="help-panel-2" role="region" aria-labelledby="help-button-2" hidden><p>점검 대상 포트의 링크 표시등과 케이블 연결 상태를 확인하고 UP 또는 DOWN을 선택하세요.</p></div></div>
+<div class="accordion-item"><h3><button class="accordion-trigger" id="help-button-3" type="button" aria-expanded="false" aria-controls="help-panel-3">알람 상태 확인 방법<span class="accordion-state" aria-hidden="true">펼치기 +</span></button></h3><div class="accordion-panel" id="help-panel-3" role="region" aria-labelledby="help-button-3" hidden><p>장비의 알람 표시와 로그를 확인하고 알람 없음, 경미한 알람, 중대 알람 중 선택하세요.</p></div></div>
+</div>
+</section>
         <section id="inspection-setup">
             <h2>장비 점검 시작</h2>
             <p> 점검을 시작하기 전에
                 담당자 정보를 입력하고 안내 사항을 확인하세요.</p>
             <div class="event-grid">
-                
                 <article class="event-card">
                     <h3>화면 테마</h3>
-                    <P> 작업 환경에 맞게
+                    <p> 작업 환경에 맞게
                         화면 테마를 변경할 수 있습니다.</p>
                     <button id="themeButton" type="button" aria-pressed="false">다크 테마로 바꾸기</button>
                 </article>
-
-                
                 <article class="event-card">
                     <h3>점검 담당자</h3>
                     <label for="nickname">담당자 이름</label>
@@ -158,7 +140,6 @@
                     <p id="nicknameCount"> 0 / 10</p>
                     <p class="input-help">담당자 이름은 최대 10자까지 입력할 수 있습니다.</p>
                 </article>
-                
                 <article class="event-card">
                     <h3>점검 시작 확인</h3>
                     <label class="agree-row">
@@ -169,32 +150,23 @@
                     <p  id="agreeMessage" aria-live="polite">
                         안내 사항을 확인한 후
                         장비 점검을 시작할 수 있습니다.</p>
-
                     <button id="startButton" type="button" disabled> 장비 점검 시작하기
                     </button>
                 </article>
             </div>
         </section>
-
-        
-
-        <dialog id="inspection-dialog" aria-labelledby="inspection-dialog-title" aria-describedby="inspection-dialog-description">
-
+        <dialog class="ui-modal" id="inspection-dialog" aria-labelledby="inspection-dialog-title" aria-describedby="inspection-dialog-description">
             <h2 id="inspection-dialog-title">
                 장비 점검 시작 안내
             </h2>
-
             <p id="inspection-dialog-description">
                 Net:Check는 사용자가 입력한
                 네트워크 장비 점검 정보를 바탕으로
                 상태를 분석하는 서비스입니다.
             </p>
-
             <p>실제 장비에 명령어를 전송하거나 네트워크 설정을 변경하지 않습니다.</p>
-
             <div class="dialog-actions">
-
-                <button id="inspection-cancel"type="button">
+                <button id="inspection-cancel" type="button">
                     취소하고 돌아가기
                 </button>
                 <button id="inspection-confirm" type="button">
@@ -202,73 +174,45 @@
                 </button>
             </div>
         </dialog>
-
-
-        
-
         <section id="inspection-flow" class="inspection-flow" hidden>
-
             <h2>네트워크 장비 점검</h2>
-
             <p>
                 단계별로 장비 정보를 입력하고
                 점검 결과를 확인해 보세요.
             </p>
-
-
-            
-
             <div class="progress" aria-label="장비 점검 진행 단계">
-
                 <span class="progress_item is-active">
                     1. 장비 정보
                 </span>
-
                 <span class="progress_item">
                     2. 점검 조건
                 </span>
-
                 <span class="progress_item">
                     3. 정보 확인
                 </span>
-
                 <span class="progress_item">
                     4. 상태 진단
                 </span>
-
                 <span class="progress_item">
                     5. 점검 완료
                 </span>
-
             </div>
-
-
-            
-
             <section class="step" data-step="1">
-
                 <h3>1단계. 장비 정보 입력</h3>
-
                 <p>
                     점검할 네트워크 장비의
                     기본 정보를 입력해 주세요.
                 </p>
-
-
                 <div class="form-group">
                     <label for="equipment-name">장비명</label>
                     <input id="equipment-name" type="text" maxlength="40" placeholder="예: 원주기업국사_SW01" aria-describedby="equipment-name-error">
                     <p id="equipment-name-error" class="error-message" aria-live="polite"></p>
                 </div>
-
-
                 <div class="form-group">
                     <label for="equipment-location"> 설치 위치</label>
                     <input  id="equipment-location" type="text"  maxlength="60"  placeholder="예: 원주기업국사 통신실" aria-describedby="equipment-location-error">
                     <p id="equipment-location-error" class="error-message" aria-live="polite"> </p>
                 </div>
-
-
                 <div class="form-group">
                     <label for="equipment-type">장비 종류 </label>
                     <select id="equipment-type" aria-describedby="equipment-type-error">
@@ -278,55 +222,41 @@
                     </select>
                     <p id="equipment-type-error" class="error-message" aria-live="polite"> </p>
                 </div>
-
                 <div class="step-actions">
                     <button id="equipment-next" type="button"> 점검 조건 선택하기 </button>
                 </div>
             </section>
-
-
-            
-
             <section class="step" data-step="2" hidden>
                 <h3>2단계. 점검 조건 설정</h3>
                 <p>점검 소요시간과
                     추가 점검 여부를 선택해 주세요.</p>
-
                 <div class="form-group">
                     <label for="duration-range">예상 점검 소요시간</label>
                     <input id="duration-range" type="range" min="0" max="2" step="1" value="1">
                     <output id="duration-value" for="duration-range"> 10분 </output>
                     <p class="input-help"> 5분 / 10분 / 20분 중 선택할 수 있습니다.</p>
                 </div>
-
                 <div class="form-group">
                     <label class="check-row">
                         <input id="additional-option" type="checkbox" aria-controls="additional-options" aria-expanded="false">
                         <span>추가 점검 항목 포함</span>
                     </label>
                 </div>
-
                 <fieldset id="additional-options" hidden>
                     <legend> 추가 점검 항목</legend>
                     <label class="radio-row">
                         <input type="radio" name="additional-count" value="1"> 1개 항목</label>
-
                     <label class="radio-row">
                         <input type="radio"  name="additional-count" value="2" checked>2개 항목</label>
-
                     <label class="radio-row">
                         <input type="radio" name="additional-count" value="3"> 3개 항목</label>
                 </fieldset>
-
                 <div class="step-actions">
                     <button id="option-prev" type="button">이전 단계</button>
                     <button id="option-next" type="button"> 입력 내용 확인하기</button>
                 </div>
             </section>
-
-            
             <section class="step" data-step="3" hidden>
-
                 <h3>3단계. 점검 정보 확인</h3>
                 <p>입력한 장비 정보와 점검 조건이
                    올바른지 확인해 주세요.</p>
@@ -338,25 +268,17 @@
                     <div><span>예상 점검시간</span><strong id="summary-duration"></strong></div>
                     <div><span>추가 점검</span><strong id="summary-additional"></strong></div>
                 </div>
-
                 <div class="step-actions">
                     <button id="summary-prev" type="button"> 점검 조건 수정하기 </button>
                     <button id="summary-next" type="button"> 장비 상태 진단하기</button>
                 </div>
             </section>
-
-            
-
             <section class="step" data-step="4" hidden>
                 <h3>4단계. 장비 상태 자동 진단</h3>
                 <p>실제로 확인한 장비 상태를
                     각 항목에서 선택해 주세요.</p>
                 <p>모든 필수 항목을 선택하면
                     점검 결과를 분석할 수 있습니다.</p>
-
-
-                
-
                 <fieldset class="diagnosis-group">
                     <legend>1. 전원 상태 (Power)</legend>
                     <label class="radio-row">
@@ -364,8 +286,6 @@
                     <label class="radio-row">
                         <input type="radio" name="power-status" value="abnormal">이상</label>
                 </fieldset>
-
-                
                 <fieldset class="diagnosis-group">
                     <legend>2. 링크 상태 (Link)</legend>
                     <label class="radio-row">
@@ -373,27 +293,20 @@
                     <label class="radio-row">
                         <input type="radio" name="link-status" value="down">DOWN</label>
                 </fieldset>
-
-                
                 <fieldset class="diagnosis-group">
                     <legend>3. 알람 상태 (Alarm)</legend>
                     <label class="radio-row">
                         <input type="radio"  name="alarm-status" value="none">알람 없음</label>
-
                     <label class="radio-row">
                         <input type="radio" name="alarm-status" value="minor">경미한 알람 (Minor)</label>
                     <label class="radio-row">
                         <input type="radio" name="alarm-status" value="critical">중대 알람 (Critical)</label>
                 </fieldset>
-
-                
                 <p id="diagnosis-error" class="error-message" role="alert" aria-live="assertive"> </p>
                 <div class="step-actions">
                     <button id="diagnosis-prev" type="button"> 이전 단계</button>
                     <button id="diagnosis-button" type="button">점검 결과 분석하기</button>
                 </div>
-
-                
                 <div id="diagnosis-result" class="diagnosis-result" aria-live="polite" hidden>
                     <h3> 장비 상태 분석 결과</h3>
                     <p> 종합 점검 상태</p>
@@ -412,9 +325,6 @@
                     </div>
                 </div>
             </section>
-
-            
-
             <section class="step complete-step" data-step="5" hidden>
                 <h3>장비 점검이 완료되었습니다.</h3>
                 <p>점검 결과를 확인하고
@@ -425,7 +335,7 @@
                     <div><span>점검 담당자</span><strong id="complete-inspector"></strong></div>
                     <div><span>최종 점검 상태</span><strong id="complete-status"></strong></div>
                 </div>
-                <div id="complete-message"class="complete-message"aria-live="polite"> </div>
+                <div id="complete-message" class="complete-message" aria-live="polite"> </div>
                 <p id="save-status" class="submit-status" role="status" aria-live="polite"></p>
                 <div class="step-actions">
                     <button id="save-inspection" type="button">점검 결과 저장하기</button>
@@ -434,13 +344,10 @@
                 </div>
             </section>
         </section>
-
-        
         <section id="archive" class="archive-section" aria-labelledby="archive-title">
             <h2 id="archive-title">내 장비 점검 기록</h2>
             <p>저장한 점검 결과를 다시 확인하거나 취소·복원할 수 있습니다.
                기록은 현재 브라우저의 로컬 스토리지(Local Storage)에 보관됩니다.</p>
-
             <div class="inspection-filters" role="group" aria-label="점검 기록 표시 조건">
                 <button class="filter-button is-active" type="button"
                         data-filter="all" aria-pressed="true">전체</button>
@@ -451,10 +358,8 @@
                 <button class="filter-button" type="button"
                         data-filter="critical" aria-pressed="false">점검 필요</button>
             </div>
-
             <p id="archive-count" class="archive-count">현재 표시 중인 점검 기록 0건</p>
             <p id="archive-status" class="archive-status" role="status" aria-live="polite"></p>
-
             <div id="empty-state" class="empty-state">
                 <h3>아직 저장한 점검 기록이 없습니다.</h3>
                 <p>장비 점검을 완료하고 결과를 저장하면 이곳에서 확인할 수 있습니다.</p>
@@ -462,9 +367,7 @@
             </div>
             <ul id="inspection-list" class="inspection-list" aria-label="저장한 장비 점검 기록" hidden></ul>
         </section>
-
-        
-        <dialog id="record-dialog" class="record-dialog" aria-labelledby="record-dialog-title">
+        <dialog id="record-dialog" class="record-dialog ui-modal" aria-labelledby="record-dialog-title">
             <h2 id="record-dialog-title">점검 기록 상세</h2>
             <p id="record-dialog-status" role="status"></p>
             <dl class="record-details">
@@ -484,8 +387,6 @@
             <ul id="record-actions"></ul>
             <button id="record-dialog-close" type="button" aria-label="점검 기록 상세 닫기">닫기</button>
         </dialog>
-
-        
         <section id="subscribe" class="subscribe-card">
             <h2>Net:Check 서비스 소식</h2>
             <p>새로운 점검 기능과
@@ -498,8 +399,6 @@
             <p id="subscribeMessage" aria-live="polite"> 이메일 주소를 입력한 뒤 신청해 주세요.</p>
         </section>
     </main>
-
-    
     <footer>
         <p>Net:Check
             | Network Equipment Smart Inspection</p>
@@ -508,6 +407,6 @@
         <p> 본 서비스는 네트워크 장비 진단 서비스 입니다.</p>
         <a href="#top">맨 위로 이동</a>
     </footer>
-    <script src="script.js?v=11"></script>
+    <script src="script.js?v=12"></script>
 </body>
 </html>
